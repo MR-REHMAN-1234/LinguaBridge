@@ -28,14 +28,14 @@ st.set_page_config(
 # ── LOAD ML MODELS ──
 @st.cache_resource
 def load_models():
-    lang_model   = pickle.load(open('models/language_model.pkl', 'rb'))
-    tfidf_lang   = pickle.load(open('models/tfidf_lang.pkl', 'rb'))
-    lang_encoder = pickle.load(open('models/lang_encoder.pkl', 'rb'))
-    sent_model   = pickle.load(open('models/sentiment_model.pkl', 'rb'))
-    tfidf_sent   = pickle.load(open('models/tfidf_sentiment.pkl', 'rb'))
-    tone_model   = pickle.load(open('models/tone_model.pkl', 'rb'))
-    tfidf_tone   = pickle.load(open('models/tfidf_tone.pkl', 'rb'))
-    tone_encoder = pickle.load(open('models/tone_encoder.pkl', 'rb'))
+   lang_model = pickle.load(open('language_model.pkl', 'rb'))
+tfidf_lang = pickle.load(open('tfidf_lang.pkl', 'rb'))
+lang_encoder = pickle.load(open('lang_encoder.pkl', 'rb'))
+sent_model = pickle.load(open('sentiment_model.pkl', 'rb'))
+tfidf_sent = pickle.load(open('tfidf_sentiment.pkl', 'rb'))
+tone_model = pickle.load(open('tone_model.pkl', 'rb'))
+tfidf_tone = pickle.load(open('tfidf_tone.pkl', 'rb'))
+tone_encoder = pickle.load(open('tone_encoder.pkl', 'rb'))
     return (lang_model, tfidf_lang, lang_encoder,
             sent_model, tfidf_sent,
             tone_model, tfidf_tone, tone_encoder)
