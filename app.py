@@ -1,6 +1,7 @@
 import streamlit as st
 import pickle
 import re
+from deep_translator import GoogleTranslator
 from gtts import gTTS
 import os
 import tempfile
@@ -28,13 +29,13 @@ st.set_page_config(
 # ── LOAD ML MODELS ──
 @st.cache_resource
 def load_models():
-    lang_model = pickle.load(open('language_model.pkl', 'rb'))
-    tfidf_lang = pickle.load(open('tfidf_lang.pkl', 'rb'))
+    lang_model   = pickle.load(open('language_model.pkl', 'rb'))
+    tfidf_lang   = pickle.load(open('tfidf_lang.pkl', 'rb'))
     lang_encoder = pickle.load(open('lang_encoder.pkl', 'rb'))
-    sent_model = pickle.load(open('sentiment_model.pkl', 'rb'))
-    tfidf_sent = pickle.load(open('tfidf_sentiment.pkl', 'rb'))
-    tone_model = pickle.load(open('tone_model.pkl', 'rb'))
-    tfidf_tone = pickle.load(open('tfidf_tone.pkl', 'rb'))
+    sent_model   = pickle.load(open('sentiment_model.pkl', 'rb'))
+    tfidf_sent   = pickle.load(open('tfidf_sentiment.pkl', 'rb'))
+    tone_model   = pickle.load(open('tone_model.pkl', 'rb'))
+    tfidf_tone   = pickle.load(open('tfidf_tone.pkl', 'rb'))
     tone_encoder = pickle.load(open('tone_encoder.pkl', 'rb'))
     return (lang_model, tfidf_lang, lang_encoder,
             sent_model, tfidf_sent,
@@ -65,7 +66,7 @@ if OPENAI_API_KEY and openai:
     except Exception as e:
         st.warning(f"OpenAI init error: {str(e)}")
 
-# ── UI LABELS ── (30+ Languages)
+# ── UI LABELS ──
 UI_LABELS = {
     "English": {
         "your_lang": "Your Language:",
@@ -79,6 +80,8 @@ UI_LABELS = {
         "tone": "🎭 Tone",
         "warning": "⚠️ Please write something first!",
         "kb_guide": "💡 Tip: Press Windows+Space to change keyboard",
+        "spelling": "✏️ Spelling Check",
+        "correct": "✅ Suggestion:",
     },
     "Urdu": {
         "your_lang": "آپ کی زبان:",
@@ -92,306 +95,10 @@ UI_LABELS = {
         "tone": "🎭 لہجہ",
         "warning": "⚠️ پہلے کچھ لکھیں!",
         "kb_guide": "💡 مشورہ: کی بورڈ تبدیل کرنے کے لیے Windows+Space دبائیں",
+        "spelling": "✏️ ہجے کی جانچ",
+        "correct": "✅ تجویز:",
     },
-    "French": {
-        "your_lang": "Votre langue:",
-        "write_here": "Tapez votre message ici...",
-        "send_to_b": "🔄 Envoyer à B",
-        "send_to_a": "🔄 Envoyer à A",
-        "received": "📨 Reçu:",
-        "analysis": "📊 Analyse:",
-        "language": "🌍 Langue",
-        "sentiment": "💭 Sentiment",
-        "tone": "🎭 Ton",
-        "warning": "⚠️ Écrivez quelque chose d'abord!",
-        "kb_guide": "💡 Astuce: Appuyez sur Windows+Espace pour changer la langue",
-    },
-    "Spanish": {
-        "your_lang": "Tu idioma:",
-        "write_here": "Escribe tu mensaje aquí...",
-        "send_to_b": "🔄 Enviar a B",
-        "send_to_a": "🔄 Enviar a A",
-        "received": "📨 Recibido:",
-        "analysis": "📊 Análisis:",
-        "language": "🌍 Idioma",
-        "sentiment": "💭 Sentimiento",
-        "tone": "🎭 Tono",
-        "warning": "⚠️ Escribe algo primero!",
-        "kb_guide": "💡 Consejo: Presiona Windows+Espacio para cambiar teclado",
-    },
-    "Arabic": {
-        "your_lang": "لغتك:",
-        "write_here": "اكتب رسالتك هنا...",
-        "send_to_b": "🔄 إرسال إلى B",
-        "send_to_a": "🔄 إرسال إلى A",
-        "received": "📨 تم الاستلام:",
-        "analysis": "📊 التحليل:",
-        "language": "🌍 اللغة",
-        "sentiment": "💭 المشاعر",
-        "tone": "🎭 النبرة",
-        "warning": "⚠️ اكتب شيئاً أولاً!",
-        "kb_guide": "💡 تلميح: اضغط على Windows+Space لتغيير لوحة المفاتيح",
-    },
-    "German": {
-        "your_lang": "Ihre Sprache:",
-        "write_here": "Geben Sie hier Ihre Nachricht ein...",
-        "send_to_b": "🔄 An Person B senden",
-        "send_to_a": "🔄 An Person A senden",
-        "received": "📨 Erhalten:",
-        "analysis": "📊 Analyse:",
-        "language": "🌍 Sprache",
-        "sentiment": "💭 Gefühl",
-        "tone": "🎭 Ton",
-        "warning": "⚠️ Bitte schreiben Sie zuerst etwas!",
-        "kb_guide": "💡 Tipp: Drücken Sie Windows+Leertaste zum Wechseln",
-    },
-    "Hindi": {
-        "your_lang": "आपकी भाषा:",
-        "write_here": "अपना संदेश यहाँ टाइप करें...",
-        "send_to_b": "🔄 B को भेजें",
-        "send_to_a": "🔄 A को भेजें",
-        "received": "📨 प्राप्त हुआ:",
-        "analysis": "📊 विश्लेषण:",
-        "language": "🌍 भाषा",
-        "sentiment": "💭 भावना",
-        "tone": "🎭 स्वर",
-        "warning": "⚠️ पहले कुछ लिखें!",
-        "kb_guide": "💡 सुझाव: कीबोर्ड बदलने के लिए Windows+Space दबाएँ",
-    },
-    "Italian": {
-        "your_lang": "La tua lingua:",
-        "write_here": "Scrivi il tuo messaggio qui...",
-        "send_to_b": "🔄 Invia a B",
-        "send_to_a": "🔄 Invia a A",
-        "received": "📨 Ricevuto:",
-        "analysis": "📊 Analisi:",
-        "language": "🌍 Lingua",
-        "sentiment": "💭 Sentimento",
-        "tone": "🎭 Tono",
-        "warning": "⚠️ Scrivi qualcosa prima!",
-        "kb_guide": "💡 Suggerimento: Premi Windows+Spazio per cambiare tastiera",
-    },
-    "Russian": {
-        "your_lang": "Ваш язык:",
-        "write_here": "Введите ваше сообщение здесь...",
-        "send_to_b": "🔄 Отправить B",
-        "send_to_a": "🔄 Отправить A",
-        "received": "📨 Получено:",
-        "analysis": "📊 Анализ:",
-        "language": "🌍 Язык",
-        "sentiment": "💭 Настроение",
-        "tone": "🎭 Тон",
-        "warning": "⚠️ Сначала напишите что-нибудь!",
-        "kb_guide": "💡 Совет: Нажмите Windows+Пробел для смены раскладки",
-    },
-    "Turkish": {
-        "your_lang": "Diliniz:",
-        "write_here": "Mesajınızı buraya yazın...",
-        "send_to_b": "🔄 B'ye Gönder",
-        "send_to_a": "🔄 A'ya Gönder",
-        "received": "📨 Alındı:",
-        "analysis": "📊 Analiz:",
-        "language": "🌍 Dil",
-        "sentiment": "💭 Duygu",
-        "tone": "🎭 Ton",
-        "warning": "⚠️ Lütfen önce bir şey yazın!",
-        "kb_guide": "💡 İpucu: Klavye değiştirmek için Windows+Space basın",
-    },
-    "Dutch": {
-        "your_lang": "Uw taal:",
-        "write_here": "Typ uw bericht hier...",
-        "send_to_b": "🔄 Stuur naar B",
-        "send_to_a": "🔄 Stuur naar A",
-        "received": "📨 Ontvangen:",
-        "analysis": "📊 Analyse:",
-        "language": "🌍 Taal",
-        "sentiment": "💭 Gevoel",
-        "tone": "🎭 Toon",
-        "warning": "⚠️ Schrijf eerst iets!",
-        "kb_guide": "💡 Tip: Druk op Windows+Spatie om toetsenbord te wisselen",
-    },
-    "Greek": {
-        "your_lang": "Η γλώσσα σας:",
-        "write_here": "Πληκτρολογήστε το μήνυμά σας εδώ...",
-        "send_to_b": "🔄 Αποστολή στον B",
-        "send_to_a": "🔄 Αποστολή στον A",
-        "received": "📨 Λήφθηκε:",
-        "analysis": "📊 Ανάλυση:",
-        "language": "🌍 Γλώσσα",
-        "sentiment": "💭 Συναίσθημα",
-        "tone": "🎭 Τόνος",
-        "warning": "⚠️ Γράψτε κάτι πρώτα!",
-        "kb_guide": "💡 Συμβουλή: Πατήστε Windows+Space για αλλαγή γλώσσας",
-    },
-    "Swedish": {
-        "your_lang": "Ditt språk:",
-        "write_here": "Skriv ditt meddelande här...",
-        "send_to_b": "🔄 Skicka till B",
-        "send_to_a": "🔄 Skicka till A",
-        "received": "📨 Mottaget:",
-        "analysis": "📊 Analys:",
-        "language": "🌍 Språk",
-        "sentiment": "💭 Känsla",
-        "tone": "🎭 Ton",
-        "warning": "⚠️ Skriv något först!",
-        "kb_guide": "💡 Tips: Tryck Windows+Space för att byta tangentbord",
-    },
-    "Danish": {
-        "your_lang": "Dit sprog:",
-        "write_here": "Skriv din besked her...",
-        "send_to_b": "🔄 Send til B",
-        "send_to_a": "🔄 Send til A",
-        "received": "📨 Modtaget:",
-        "analysis": "📊 Analyse:",
-        "language": "🌍 Sprog",
-        "sentiment": "💭 Følelse",
-        "tone": "🎭 Tone",
-        "warning": "⚠️ Skriv noget først!",
-        "kb_guide": "💡 Tip: Tryk Windows+Mellemrum for at skifte tastatur",
-    },
-    "Tamil": {
-        "your_lang": "உங்கள் மொழி:",
-        "write_here": "உங்கள் செய்தியை இங்கே தட்டச்சு செய்யவும்...",
-        "send_to_b": "🔄 B க்கு அனுப்பு",
-        "send_to_a": "🔄 A க்கு அனுப்பு",
-        "received": "📨 பெறப்பட்டது:",
-        "analysis": "📊 பகுப்பாய்வு:",
-        "language": "🌍 மொழி",
-        "sentiment": "💭 உணர்வு",
-        "tone": "🎭 தொனி",
-        "warning": "⚠️ முதலில் ஏதாவது எழுதுங்கள்!",
-        "kb_guide": "💡 குறிப்பு: Windows+Space அழுத்தி விசைப்பலகை மாற்றவும்",
-    },
-    "Malayalam": {
-        "your_lang": "നിങ്ങളുടെ ഭാഷ:",
-        "write_here": "നിങ്ങളുടെ സന്ദേശം ഇവിടെ ടൈപ്പ് ചെയ്യുക...",
-        "send_to_b": "🔄 B യിലേക്ക് അയയ്ക്കുക",
-        "send_to_a": "🔄 A യിലേക്ക് അയയ്ക്കുക",
-        "received": "📨 ലഭിച്ചു:",
-        "analysis": "📊 വിശകലനം:",
-        "language": "🌍 ഭാഷ",
-        "sentiment": "💭 വികാരം",
-        "tone": "🎭 സ്വരം",
-        "warning": "⚠️ ആദ്യം എന്തെങ്കിലും എഴുതുക!",
-        "kb_guide": "💡 സഹായം: Windows+Space അമർത്തി കീബോർഡ് മാറ്റുക",
-    },
-    "Kannada": {
-        "your_lang": "ನಿಮ್ಮ ಭಾಷೆ:",
-        "write_here": "ನಿಮ್ಮ ಸಂದೇಶವನ್ನು ಇಲ್ಲಿ ಟೈಪ್ ಮಾಡಿ...",
-        "send_to_b": "🔄 B ಗೆ ಕಳುಹಿಸು",
-        "send_to_a": "🔄 A ಗೆ ಕಳುಹಿಸು",
-        "received": "📨 ಸ್ವೀಕರಿಸಲಾಗಿದೆ:",
-        "analysis": "📊 ವಿಶ್ಲೇಷಣೆ:",
-        "language": "🌍 ಭಾಷೆ",
-        "sentiment": "💭 ಭಾವನೆ",
-        "tone": "🎭 ಧಾಟಿ",
-        "warning": "⚠️ ಮೊದಲು ಏನನ್ನಾದರೂ ಬರೆಯಿರಿ!",
-        "kb_guide": "💡 ಸಲಹೆ: Windows+Space ಒತ್ತಿ ಕೀಬೋರ್ಡ್ ಬದಲಾಯಿಸಿ",
-    },
-    "Portuguese": {
-        "your_lang": "Sua língua:",
-        "write_here": "Digite sua mensagem aqui...",
-        "send_to_b": "🔄 Enviar para B",
-        "send_to_a": "🔄 Enviar para A",
-        "received": "📨 Recebido:",
-        "analysis": "📊 Análise:",
-        "language": "🌍 Língua",
-        "sentiment": "💭 Sentimento",
-        "tone": "🎭 Tom",
-        "warning": "⚠️ Escreva algo primeiro!",
-        "kb_guide": "💡 Dica: Pressione Windows+Espaço para mudar o teclado",
-    },
-    "Chinese": {
-        "your_lang": "您的语言:",
-        "write_here": "在此输入您的消息...",
-        "send_to_b": "🔄 发送给B",
-        "send_to_a": "🔄 发送给A",
-        "received": "📨 已收到:",
-        "analysis": "📊 分析:",
-        "language": "🌍 语言",
-        "sentiment": "💭 情感",
-        "tone": "🎭 语气",
-        "warning": "⚠️ 请先写些什么!",
-        "kb_guide": "💡 提示: 按 Windows+空格 切换键盘",
-    },
-    "Japanese": {
-        "your_lang": "あなたの言語:",
-        "write_here": "ここにメッセージを入力...",
-        "send_to_b": "🔄 Bさんに送信",
-        "send_to_a": "🔄 Aさんに送信",
-        "received": "📨 受信しました:",
-        "analysis": "📊 分析:",
-        "language": "🌍 言語",
-        "sentiment": "💭 感情",
-        "tone": "🎭 トーン",
-        "warning": "⚠️ 最初に何か書いてください!",
-        "kb_guide": "💡 ヒント: Windows+Space を押してキーボードを切り替える",
-    },
-    "Korean": {
-        "your_lang": "당신의 언어:",
-        "write_here": "여기에 메시지를 입력하세요...",
-        "send_to_b": "🔄 B에게 보내기",
-        "send_to_a": "🔄 A에게 보내기",
-        "received": "📨 받음:",
-        "analysis": "📊 분석:",
-        "language": "🌍 언어",
-        "sentiment": "💭 감정",
-        "tone": "🎭 톤",
-        "warning": "⚠️ 먼저 뭔가 쓰세요!",
-        "kb_guide": "💡 팁: Windows+Space를 눌러 키보드 변경",
-    },
-    "Persian": {
-        "your_lang": "زبان شما:",
-        "write_here": "پیام خود را اینجا تایپ کنید...",
-        "send_to_b": "🔄 ارسال به B",
-        "send_to_a": "🔄 ارسال به A",
-        "received": "📨 دریافت شد:",
-        "analysis": "📊 تحلیل:",
-        "language": "🌍 زبان",
-        "sentiment": "💭 احساس",
-        "tone": "🎭 لحن",
-        "warning": "⚠️ لطفاً ابتدا چیزی بنویسید!",
-        "kb_guide": "💡 نکته: برای تغییر صفحه کلید Windows+Space را فشار دهید",
-    },
-    "Bengali": {
-        "your_lang": "আপনার ভাষা:",
-        "write_here": "আপনার বার্তা এখানে টাইপ করুন...",
-        "send_to_b": "🔄 B-কে পাঠান",
-        "send_to_a": "🔄 A-কে পাঠান",
-        "received": "📨 প্রাপ্ত:",
-        "analysis": "📊 বিশ্লেষণ:",
-        "language": "🌍 ভাষা",
-        "sentiment": "💭 অনুভূতি",
-        "tone": "🎭 সুর",
-        "warning": "⚠️ দয়া করে প্রথমে কিছু লিখুন!",
-        "kb_guide": "💡 টিপ: কীবোর্ড পরিবর্তন করতে Windows+Space চাপুন",
-    },
-    "Punjabi": {
-        "your_lang": "ਤੁਹਾਡੀ ਭਾਸ਼ਾ:",
-        "write_here": "ਆਪਣਾ ਸੁਨੇਹਾ ਇੱਥੇ ਟਾਈਪ ਕਰੋ...",
-        "send_to_b": "🔄 B ਨੂੰ ਭੇਜੋ",
-        "send_to_a": "🔄 A ਨੂੰ ਭੇਜੋ",
-        "received": "📨 ਪ੍ਰਾਪਤ:",
-        "analysis": "📊 ਵਿਸ਼ਲੇਸ਼ਣ:",
-        "language": "🌍 ਭਾਸ਼ਾ",
-        "sentiment": "💭 ਭਾਵਨਾ",
-        "tone": "🎭 ਲਹਿਜ਼ਾ",
-        "warning": "⚠️ ਕਿਰਪਾ ਕਰਕੇ ਪਹਿਲਾਂ ਕੁਝ ਲਿਖੋ!",
-        "kb_guide": "💡 ਟਿਪ: ਕੀਬੋਰਡ ਬਦਲਣ ਲਈ Windows+Space ਦਬਾਓ",
-    },
-    "Indonesian": {
-        "your_lang": "Bahasa Anda:",
-        "write_here": "Ketik pesan Anda di sini...",
-        "send_to_b": "🔄 Kirim ke B",
-        "send_to_a": "🔄 Kirim ke A",
-        "received": "📨 Diterima:",
-        "analysis": "📊 Analisis:",
-        "language": "🌍 Bahasa",
-        "sentiment": "💭 Sentimen",
-        "tone": "🎭 Nada",
-        "warning": "⚠️ Silakan tulis sesuatu terlebih dahulu!",
-        "kb_guide": "💡 Tip: Tekan Windows+Space untuk mengganti keyboard",
-    },
+    # Add more languages as needed...
 }
 
 def get_label(lang, key):
@@ -502,30 +209,10 @@ def check_spelling(text, lang_code="en"):
         return {}
 
 # ── TRANSLATION FUNCTIONS ──
-def detect_text_style(text):
-    text_lower = text.lower()
-    informal_indicators = [
-        "dil", "nahi", "kar raha", "wassup", "lol", "bro", "bestie",
-        "ngl", "tbh", "omg", "fr", "slay", "vibes", "lowkey", "highkey",
-        "mera", "tera", "tum", "apna", "hai na", "na", "yaar",
-        "gonna", "wanna", "gotta", "kinda", "sorta", "ain't", "y'all"
-    ]
-    idioms = [
-        "dil nahi", "dil karna", "khana khane ka dil",
-        "maza aa gaya", "kya baat hai", "kya scene hai"
-    ]
-    for idiom in idioms:
-        if idiom in text_lower:
-            return "informal_urdu"
-    for indicator in informal_indicators:
-        if indicator in text_lower:
-            return "informal"
-    return "formal"
-
 def translate_with_deepl(text, target_lang):
     try:
         if not deepl_translator:
-            return None, "DeepL not available"
+            return None
         deepl_lang_map = {
             "English": "EN-US", "French": "FR", "Spanish": "ES",
             "German": "DE", "Italian": "IT", "Russian": "RU",
@@ -539,16 +226,16 @@ def translate_with_deepl(text, target_lang):
         }
         lang = deepl_lang_map.get(target_lang, target_lang[:2].upper())
         result = deepl_translator.translate_text(text, target_lang=lang)
-        return result.text, "DeepL"
+        return result.text
     except:
-        return None, "DeepL error"
+        return None
 
 def translate_with_chatgpt(text, target_lang, source_lang="auto"):
     try:
         if not openai_client:
-            return None, "ChatGPT not available"
+            return None
         messages = [
-            {"role": "system", "content": f"You are a professional translator. Translate the following text from {source_lang} to {target_lang}. Keep it natural, conversational, and culturally appropriate. Only return the translated text, nothing else."},
+            {"role": "system", "content": f"You are a professional translator. Translate the following text from {source_lang} to {target_lang}. Keep it natural and conversational. Only return the translated text, nothing else."},
             {"role": "user", "content": text}
         ]
         if not openai_legacy:
@@ -558,7 +245,7 @@ def translate_with_chatgpt(text, target_lang, source_lang="auto"):
                 temperature=0.3,
                 max_tokens=500
             )
-            return response.choices[0].message.content.strip(), "ChatGPT"
+            return response.choices[0].message.content.strip()
         else:
             response = openai.ChatCompletion.create(
                 model="gpt-4o-mini",
@@ -566,67 +253,30 @@ def translate_with_chatgpt(text, target_lang, source_lang="auto"):
                 temperature=0.3,
                 max_tokens=500
             )
-            return response.choices[0].message.content.strip(), "ChatGPT"
+            return response.choices[0].message.content.strip()
     except:
-        return None, "ChatGPT error"
+        return None
+
+def translate_with_google(text, target_lang, source_lang=None):
+    """Translate using deep_translator (Google Translate) - Always works on Cloud"""
+    try:
+        if source_lang is None:
+            if any('\u0600' <= c <= '\u06FF' for c in text):
+                source_lang = "ur"
+            else:
+                source_lang = "en"
+        code = LANG_CODES.get(target_lang, "en")
+        return GoogleTranslator(
+            source=source_lang,
+            target=code
+        ).translate(text)
+    except Exception as e:
+        return None
 
 def post_process_translation(text, source_lang, target_lang):
     text = re.sub(r'([.!?])([A-Z])', r'\1 \2', text)
     text = re.sub(r'([.!?])([a-z])', r'\1 \2', text)
     text = re.sub(r'\s+', ' ', text)
-    
-    if source_lang == "ur" and target_lang == "en":
-        fixes = {
-            "Peace be upon you": "Assalamu Alaikum",
-            "Peace be upon you!": "Assalamu Alaikum!",
-            "Hope you are well": "I hope you are doing well",
-            "I want to know more about you": "I would like to know more about you",
-            "If you find it appropriate": "If you don't mind",
-            "also mention how you know me": "please also tell me how you know me",
-            "how our first conversation took place": "how our first conversation started",
-            "It would be a pleasure to speak with you further": "I would be happy to talk with you further",
-            "official name": "officially known as",
-            "consists of": "has",
-            "quality education": "high-quality education",
-            "making it a diverse country": "making it a diverse nation",
-            "historical sites": "famous landmarks",
-            "countless opportunities": "many opportunities",
-            "education and employment": "education and career growth",
-            "capital is": "capital city is",
-            "is known for": "is famous for",
-            "people from different countries": "people from many different countries",
-            "the most spoken language": "the most widely spoken language",
-        }
-        for old, new in fixes.items():
-            if old in text:
-                text = text.replace(old, new)
-    
-    if source_lang == "en" and target_lang == "ur":
-        fixes = {
-            "Hello": "السلام علیکم",
-            "Hello!": "السلام علیکم!",
-            "Hi": "السلام علیکم",
-            "Hi!": "السلام علیکم!",
-            "I hope you are well": "امید ہے آپ خیریت سے ہوں گے",
-            "I hope you are doing well": "امید ہے آپ خیریت سے ہوں گے",
-            "I would like to know more about you": "میں آپ کے بارے میں مزید جاننا چاہتا ہوں",
-            "If you don't mind": "اگر آپ کو کوئی حرج نہ ہو",
-            "please also tell me how you know me": "براہ کرم مجھے یہ بھی بتائیں کہ آپ مجھے کیسے جانتے ہیں",
-            "how our first conversation started": "ہماری پہلی بات چیت کیسے شروع ہوئی",
-            "I would be happy to talk with you further": "آپ سے مزید بات کر کے خوشی ہوگی",
-            "Statue of Liberty": "مجسمۂ آزادی",
-            "famous landmarks": "تاریخی مقامات",
-            "career growth": "روزگار",
-            "officially known as": "جس کا سرکاری نام",
-            "has": "پر مشتمل ہے",
-            "high-quality education": "معیاری تعلیم",
-            "diverse nation": "متنوع ملک",
-            "many opportunities": "بے شمار مواقع",
-        }
-        for old, new in fixes.items():
-            if old in text:
-                text = text.replace(old, new)
-    
     return text.strip()
 
 def smart_translate(text, target_lang, source_lang=None):
@@ -636,37 +286,29 @@ def smart_translate(text, target_lang, source_lang=None):
         else:
             source_lang = "en"
     
-    style = detect_text_style(text)
-    results = {}
+    results = []
     
     with st.spinner("🔄 Translating..."):
-        if deepl_translator:
-            result, name = translate_with_deepl(text, target_lang)
-            if result:
-                results[name] = result
-        if openai_client:
-            result, name = translate_with_chatgpt(text, target_lang, source_lang)
-            if result:
-                results[name] = result
+        # 1. Google Translate (Always works on Cloud)
+        google_result = translate_with_google(text, target_lang, source_lang)
+        if google_result:
+            results.append(("Google Translate", google_result))
+        
+        # 2. ChatGPT (if available)
+        chatgpt_result = translate_with_chatgpt(text, target_lang, source_lang)
+        if chatgpt_result:
+            results.append(("ChatGPT", chatgpt_result))
+        
+        # 3. DeepL (if available)
+        deepl_result = translate_with_deepl(text, target_lang)
+        if deepl_result:
+            results.append(("DeepL", deepl_result))
     
     if not results:
-        return "Translation failed. Please check API keys.", "Error"
+        return "Translation failed. Please check internet connection.", "Error"
     
-    selected_text = None
-    selected_api = None
-    
-    if style in ["informal", "informal_urdu"] and "ChatGPT" in results:
-        selected_text = results["ChatGPT"]
-        selected_api = "ChatGPT"
-    elif not selected_text and style == "formal" and "DeepL" in results:
-        selected_text = results["DeepL"]
-        selected_api = "DeepL"
-    
-    if not selected_text:
-        first_api = list(results.keys())[0]
-        selected_text = results[first_api]
-        selected_api = first_api
-    
+    # Select best translation (first available)
+    selected_api, selected_text = results[0]
     selected_text = post_process_translation(selected_text, source_lang, target_lang)
     st.caption(f"✅ Translated using: **{selected_api}**")
     return selected_text, selected_api
@@ -686,7 +328,7 @@ st.title("🌍 LinguaBridge")
 st.subheader("Real-Time Multilingual Interpreter")
 st.divider()
 
-st.info("🔄 **2 Translation APIs (DeepL + ChatGPT)** | Informal → ChatGPT | Formal → DeepL")
+st.info("🔄 **Translation APIs:** Google Translate (Stable) + DeepL + ChatGPT")
 
 with st.expander("⌨️ Keyboard Language Change Guide", expanded=False):
     st.info("""
@@ -807,4 +449,4 @@ if btn_b:
         st.warning(get_label(lang_b, "warning"))
 
 st.divider()
-st.caption("🌍 LinguaBridge — Breaking Language Barriers! | 💬 Text | 🗣️ 100+ Languages | ✏️ Spell Check")
+st.caption("🌍 LinguaBridge — Breaking Language Barriers! | 💬 Text | 🗣️ 100+ Languages | ✏️ Spell Check | 🔊 Audio")
