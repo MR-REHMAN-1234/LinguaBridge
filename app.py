@@ -98,7 +98,351 @@ UI_LABELS = {
         "spelling": "✏️ ہجے کی جانچ",
         "correct": "✅ تجویز:",
     },
-    # Add more languages as needed...
+    "French": {
+        "your_lang": "Votre langue:",
+        "write_here": "Tapez votre message ici...",
+        "send_to_b": "🔄 Envoyer à B",
+        "send_to_a": "🔄 Envoyer à A",
+        "received": "📨 Reçu:",
+        "analysis": "📊 Analyse:",
+        "language": "🌍 Langue",
+        "sentiment": "💭 Sentiment",
+        "tone": "🎭 Ton",
+        "warning": "⚠️ Écrivez quelque chose d'abord!",
+        "kb_guide": "💡 Astuce: Appuyez sur Windows+Espace pour changer la langue",
+        "spelling": "✏️ Vérification orthographique",
+        "correct": "✅ Suggestion:",
+    },
+    "Spanish": {
+        "your_lang": "Tu idioma:",
+        "write_here": "Escribe tu mensaje aquí...",
+        "send_to_b": "🔄 Enviar a B",
+        "send_to_a": "🔄 Enviar a A",
+        "received": "📨 Recibido:",
+        "analysis": "📊 Análisis:",
+        "language": "🌍 Idioma",
+        "sentiment": "💭 Sentimiento",
+        "tone": "🎭 Tono",
+        "warning": "⚠️ Escribe algo primero!",
+        "kb_guide": "💡 Consejo: Presiona Windows+Espacio para cambiar teclado",
+        "spelling": "✏️ Revisión ortográfica",
+        "correct": "✅ Sugerencia:",
+    },
+    "Arabic": {
+        "your_lang": "لغتك:",
+        "write_here": "اكتب رسالتك هنا...",
+        "send_to_b": "🔄 إرسال إلى B",
+        "send_to_a": "🔄 إرسال إلى A",
+        "received": "📨 تم الاستلام:",
+        "analysis": "📊 التحليل:",
+        "language": "🌍 اللغة",
+        "sentiment": "💭 المشاعر",
+        "tone": "🎭 النبرة",
+        "warning": "⚠️ اكتب شيئاً أولاً!",
+        "kb_guide": "💡 تلميح: اضغط على Windows+Space لتغيير لوحة المفاتيح",
+        "spelling": "✏️ التدقيق الإملائي",
+        "correct": "✅ اقتراح:",
+    },
+    "German": {
+        "your_lang": "Ihre Sprache:",
+        "write_here": "Geben Sie hier Ihre Nachricht ein...",
+        "send_to_b": "🔄 An Person B senden",
+        "send_to_a": "🔄 An Person A senden",
+        "received": "📨 Erhalten:",
+        "analysis": "📊 Analyse:",
+        "language": "🌍 Sprache",
+        "sentiment": "💭 Gefühl",
+        "tone": "🎭 Ton",
+        "warning": "⚠️ Bitte schreiben Sie zuerst etwas!",
+        "kb_guide": "💡 Tipp: Drücken Sie Windows+Leertaste zum Wechseln",
+        "spelling": "✏️ Rechtschreibprüfung",
+        "correct": "✅ Vorschlag:",
+    },
+    "Hindi": {
+        "your_lang": "आपकी भाषा:",
+        "write_here": "अपना संदेश यहाँ टाइप करें...",
+        "send_to_b": "🔄 B को भेजें",
+        "send_to_a": "🔄 A को भेजें",
+        "received": "📨 प्राप्त हुआ:",
+        "analysis": "📊 विश्लेषण:",
+        "language": "🌍 भाषा",
+        "sentiment": "💭 भावना",
+        "tone": "🎭 स्वर",
+        "warning": "⚠️ पहले कुछ लिखें!",
+        "kb_guide": "💡 सुझाव: कीबोर्ड बदलने के लिए Windows+Space दबाएँ",
+        "spelling": "✏️ वर्तनी जाँच",
+        "correct": "✅ सुझाव:",
+    },
+    "Italian": {
+        "your_lang": "La tua lingua:",
+        "write_here": "Scrivi il tuo messaggio qui...",
+        "send_to_b": "🔄 Invia a B",
+        "send_to_a": "🔄 Invia a A",
+        "received": "📨 Ricevuto:",
+        "analysis": "📊 Analisi:",
+        "language": "🌍 Lingua",
+        "sentiment": "💭 Sentimento",
+        "tone": "🎭 Tono",
+        "warning": "⚠️ Scrivi qualcosa prima!",
+        "kb_guide": "💡 Suggerimento: Premi Windows+Spazio per cambiare tastiera",
+        "spelling": "✏️ Controllo ortografico",
+        "correct": "✅ Suggerimento:",
+    },
+    "Russian": {
+        "your_lang": "Ваш язык:",
+        "write_here": "Введите ваше сообщение здесь...",
+        "send_to_b": "🔄 Отправить B",
+        "send_to_a": "🔄 Отправить A",
+        "received": "📨 Получено:",
+        "analysis": "📊 Анализ:",
+        "language": "🌍 Язык",
+        "sentiment": "💭 Настроение",
+        "tone": "🎭 Тон",
+        "warning": "⚠️ Сначала напишите что-нибудь!",
+        "kb_guide": "💡 Совет: Нажмите Windows+Пробел для смены раскладки",
+        "spelling": "✏️ Проверка орфографии",
+        "correct": "✅ Предложение:",
+    },
+    "Turkish": {
+        "your_lang": "Diliniz:",
+        "write_here": "Mesajınızı buraya yazın...",
+        "send_to_b": "🔄 B'ye Gönder",
+        "send_to_a": "🔄 A'ya Gönder",
+        "received": "📨 Alındı:",
+        "analysis": "📊 Analiz:",
+        "language": "🌍 Dil",
+        "sentiment": "💭 Duygu",
+        "tone": "🎭 Ton",
+        "warning": "⚠️ Lütfen önce bir şey yazın!",
+        "kb_guide": "💡 İpucu: Klavye değiştirmek için Windows+Space basın",
+        "spelling": "✏️ Yazım Denetimi",
+        "correct": "✅ Öneri:",
+    },
+    "Dutch": {
+        "your_lang": "Uw taal:",
+        "write_here": "Typ uw bericht hier...",
+        "send_to_b": "🔄 Stuur naar B",
+        "send_to_a": "🔄 Stuur naar A",
+        "received": "📨 Ontvangen:",
+        "analysis": "📊 Analyse:",
+        "language": "🌍 Taal",
+        "sentiment": "💭 Gevoel",
+        "tone": "🎭 Toon",
+        "warning": "⚠️ Schrijf eerst iets!",
+        "kb_guide": "💡 Tip: Druk op Windows+Spatie om toetsenbord te wisselen",
+        "spelling": "✏️ Spellingcontrole",
+        "correct": "✅ Suggestie:",
+    },
+    "Greek": {
+        "your_lang": "Η γλώσσα σας:",
+        "write_here": "Πληκτρολογήστε το μήνυμά σας εδώ...",
+        "send_to_b": "🔄 Αποστολή στον B",
+        "send_to_a": "🔄 Αποστολή στον A",
+        "received": "📨 Λήφθηκε:",
+        "analysis": "📊 Ανάλυση:",
+        "language": "🌍 Γλώσσα",
+        "sentiment": "💭 Συναίσθημα",
+        "tone": "🎭 Τόνος",
+        "warning": "⚠️ Γράψτε κάτι πρώτα!",
+        "kb_guide": "💡 Συμβουλή: Πατήστε Windows+Space για αλλαγή γλώσσας",
+        "spelling": "✏️ Ορθογραφικός έλεγχος",
+        "correct": "✅ Πρόταση:",
+    },
+    "Swedish": {
+        "your_lang": "Ditt språk:",
+        "write_here": "Skriv ditt meddelande här...",
+        "send_to_b": "🔄 Skicka till B",
+        "send_to_a": "🔄 Skicka till A",
+        "received": "📨 Mottaget:",
+        "analysis": "📊 Analys:",
+        "language": "🌍 Språk",
+        "sentiment": "💭 Känsla",
+        "tone": "🎭 Ton",
+        "warning": "⚠️ Skriv något först!",
+        "kb_guide": "💡 Tips: Tryck Windows+Space för att byta tangentbord",
+        "spelling": "✏️ Stavningskontroll",
+        "correct": "✅ Förslag:",
+    },
+    "Danish": {
+        "your_lang": "Dit sprog:",
+        "write_here": "Skriv din besked her...",
+        "send_to_b": "🔄 Send til B",
+        "send_to_a": "🔄 Send til A",
+        "received": "📨 Modtaget:",
+        "analysis": "📊 Analyse:",
+        "language": "🌍 Sprog",
+        "sentiment": "💭 Følelse",
+        "tone": "🎭 Tone",
+        "warning": "⚠️ Skriv noget først!",
+        "kb_guide": "💡 Tip: Tryk Windows+Mellemrum for at skifte tastatur",
+        "spelling": "✏️ Stavekontrol",
+        "correct": "✅ Forslag:",
+    },
+    "Tamil": {
+        "your_lang": "உங்கள் மொழி:",
+        "write_here": "உங்கள் செய்தியை இங்கே தட்டச்சு செய்யவும்...",
+        "send_to_b": "🔄 B க்கு அனுப்பு",
+        "send_to_a": "🔄 A க்கு அனுப்பு",
+        "received": "📨 பெறப்பட்டது:",
+        "analysis": "📊 பகுப்பாய்வு:",
+        "language": "🌍 மொழி",
+        "sentiment": "💭 உணர்வு",
+        "tone": "🎭 தொனி",
+        "warning": "⚠️ முதலில் ஏதாவது எழுதுங்கள்!",
+        "kb_guide": "💡 குறிப்பு: Windows+Space அழுத்தி விசைப்பலகை மாற்றவும்",
+        "spelling": "✏️ எழுத்துப்பிழை சரிபார்ப்பு",
+        "correct": "✅ பரிந்துரை:",
+    },
+    "Malayalam": {
+        "your_lang": "നിങ്ങളുടെ ഭാഷ:",
+        "write_here": "നിങ്ങളുടെ സന്ദേശം ഇവിടെ ടൈപ്പ് ചെയ്യുക...",
+        "send_to_b": "🔄 B യിലേക്ക് അയയ്ക്കുക",
+        "send_to_a": "🔄 A യിലേക്ക് അയയ്ക്കുക",
+        "received": "📨 ലഭിച്ചു:",
+        "analysis": "📊 വിശകലനം:",
+        "language": "🌍 ഭാഷ",
+        "sentiment": "💭 വികാരം",
+        "tone": "🎭 സ്വരം",
+        "warning": "⚠️ ആദ്യം എന്തെങ്കിലും എഴുതുക!",
+        "kb_guide": "💡 സഹായം: Windows+Space അമർത്തി കീബോർഡ് മാറ്റുക",
+        "spelling": "✏️ അക്ഷരത്തെറ്റ് പരിശോധന",
+        "correct": "✅ നിർദ്ദേശം:",
+    },
+    "Kannada": {
+        "your_lang": "ನಿಮ್ಮ ಭಾಷೆ:",
+        "write_here": "ನಿಮ್ಮ ಸಂದೇಶವನ್ನು ಇಲ್ಲಿ ಟೈಪ್ ಮಾಡಿ...",
+        "send_to_b": "🔄 B ಗೆ ಕಳುಹಿಸು",
+        "send_to_a": "🔄 A ಗೆ ಕಳುಹಿಸು",
+        "received": "📨 ಸ್ವೀಕರಿಸಲಾಗಿದೆ:",
+        "analysis": "📊 ವಿಶ್ಲೇಷಣೆ:",
+        "language": "🌍 ಭಾಷೆ",
+        "sentiment": "💭 ಭಾವನೆ",
+        "tone": "🎭 ಧಾಟಿ",
+        "warning": "⚠️ ಮೊದಲು ಏನನ್ನಾದರೂ ಬರೆಯಿರಿ!",
+        "kb_guide": "💡 ಸಲಹೆ: Windows+Space ಒತ್ತಿ ಕೀಬೋರ್ಡ್ ಬದಲಾಯಿಸಿ",
+        "spelling": "✏️ ಕಾಗುಣಿತ ಪರಿಶೀಲನೆ",
+        "correct": "✅ ಸಲಹೆ:",
+    },
+    "Portuguese": {
+        "your_lang": "Sua língua:",
+        "write_here": "Digite sua mensagem aqui...",
+        "send_to_b": "🔄 Enviar para B",
+        "send_to_a": "🔄 Enviar para A",
+        "received": "📨 Recebido:",
+        "analysis": "📊 Análise:",
+        "language": "🌍 Língua",
+        "sentiment": "💭 Sentimento",
+        "tone": "🎭 Tom",
+        "warning": "⚠️ Escreva algo primeiro!",
+        "kb_guide": "💡 Dica: Pressione Windows+Espaço para mudar o teclado",
+        "spelling": "✏️ Verificação ortográfica",
+        "correct": "✅ Sugestão:",
+    },
+    "Chinese": {
+        "your_lang": "您的语言:",
+        "write_here": "在此输入您的消息...",
+        "send_to_b": "🔄 发送给B",
+        "send_to_a": "🔄 发送给A",
+        "received": "📨 已收到:",
+        "analysis": "📊 分析:",
+        "language": "🌍 语言",
+        "sentiment": "💭 情感",
+        "tone": "🎭 语气",
+        "warning": "⚠️ 请先写些什么!",
+        "kb_guide": "💡 提示: 按 Windows+空格 切换键盘",
+        "spelling": "✏️ 拼写检查",
+        "correct": "✅ 建议:",
+    },
+    "Japanese": {
+        "your_lang": "あなたの言語:",
+        "write_here": "ここにメッセージを入力...",
+        "send_to_b": "🔄 Bさんに送信",
+        "send_to_a": "🔄 Aさんに送信",
+        "received": "📨 受信しました:",
+        "analysis": "📊 分析:",
+        "language": "🌍 言語",
+        "sentiment": "💭 感情",
+        "tone": "🎭 トーン",
+        "warning": "⚠️ 最初に何か書いてください!",
+        "kb_guide": "💡 ヒント: Windows+Space を押してキーボードを切り替える",
+        "spelling": "✏️ スペルチェック",
+        "correct": "✅ 提案:",
+    },
+    "Korean": {
+        "your_lang": "당신의 언어:",
+        "write_here": "여기에 메시지를 입력하세요...",
+        "send_to_b": "🔄 B에게 보내기",
+        "send_to_a": "🔄 A에게 보내기",
+        "received": "📨 받음:",
+        "analysis": "📊 분석:",
+        "language": "🌍 언어",
+        "sentiment": "💭 감정",
+        "tone": "🎭 톤",
+        "warning": "⚠️ 먼저 뭔가 쓰세요!",
+        "kb_guide": "💡 팁: Windows+Space를 눌러 키보드 변경",
+        "spelling": "✏️ 맞춤법 검사",
+        "correct": "✅ 제안:",
+    },
+    "Persian": {
+        "your_lang": "زبان شما:",
+        "write_here": "پیام خود را اینجا تایپ کنید...",
+        "send_to_b": "🔄 ارسال به B",
+        "send_to_a": "🔄 ارسال به A",
+        "received": "📨 دریافت شد:",
+        "analysis": "📊 تحلیل:",
+        "language": "🌍 زبان",
+        "sentiment": "💭 احساس",
+        "tone": "🎭 لحن",
+        "warning": "⚠️ لطفاً ابتدا چیزی بنویسید!",
+        "kb_guide": "💡 نکته: برای تغییر صفحه کلید Windows+Space را فشار دهید",
+        "spelling": "✏️ بررسی املا",
+        "correct": "✅ پیشنهاد:",
+    },
+    "Bengali": {
+        "your_lang": "আপনার ভাষা:",
+        "write_here": "আপনার বার্তা এখানে টাইপ করুন...",
+        "send_to_b": "🔄 B-কে পাঠান",
+        "send_to_a": "🔄 A-কে পাঠান",
+        "received": "📨 প্রাপ্ত:",
+        "analysis": "📊 বিশ্লেষণ:",
+        "language": "🌍 ভাষা",
+        "sentiment": "💭 অনুভূতি",
+        "tone": "🎭 সুর",
+        "warning": "⚠️ দয়া করে প্রথমে কিছু লিখুন!",
+        "kb_guide": "💡 টিপ: কীবোর্ড পরিবর্তন করতে Windows+Space চাপুন",
+        "spelling": "✏️ বানান পরীক্ষা",
+        "correct": "✅ পরামর্শ:",
+    },
+    "Punjabi": {
+        "your_lang": "ਤੁਹਾਡੀ ਭਾਸ਼ਾ:",
+        "write_here": "ਆਪਣਾ ਸੁਨੇਹਾ ਇੱਥੇ ਟਾਈਪ ਕਰੋ...",
+        "send_to_b": "🔄 B ਨੂੰ ਭੇਜੋ",
+        "send_to_a": "🔄 A ਨੂੰ ਭੇਜੋ",
+        "received": "📨 ਪ੍ਰਾਪਤ:",
+        "analysis": "📊 ਵਿਸ਼ਲੇਸ਼ਣ:",
+        "language": "🌍 ਭਾਸ਼ਾ",
+        "sentiment": "💭 ਭਾਵਨਾ",
+        "tone": "🎭 ਲਹਿਜ਼ਾ",
+        "warning": "⚠️ ਕਿਰਪਾ ਕਰਕੇ ਪਹਿਲਾਂ ਕੁਝ ਲਿਖੋ!",
+        "kb_guide": "💡 ਟਿਪ: ਕੀਬੋਰਡ ਬਦਲਣ ਲਈ Windows+Space ਦਬਾਓ",
+        "spelling": "✏️ ਸ਼ਬਦ-ਜਾਂਚ",
+        "correct": "✅ ਸੁਝਾਅ:",
+    },
+    "Indonesian": {
+        "your_lang": "Bahasa Anda:",
+        "write_here": "Ketik pesan Anda di sini...",
+        "send_to_b": "🔄 Kirim ke B",
+        "send_to_a": "🔄 Kirim ke A",
+        "received": "📨 Diterima:",
+        "analysis": "📊 Analisis:",
+        "language": "🌍 Bahasa",
+        "sentiment": "💭 Sentimen",
+        "tone": "🎭 Nada",
+        "warning": "⚠️ Silakan tulis sesuatu terlebih dahulu!",
+        "kb_guide": "💡 Tip: Tekan Windows+Space untuk mengganti keyboard",
+        "spelling": "✏️ Pengecekan Ejaan",
+        "correct": "✅ Saran:",
+    },
 }
 
 def get_label(lang, key):
@@ -178,27 +522,46 @@ GTTS_CODES = {
     "Thai": "th", "Burmese": "my", "Khmer": "km", "Lao": "lo",
 }
 
-# ── SPELL CHECK ──
-def check_spelling(text, lang_code="en"):
+# ── SPELL CHECK ── (FIXED - Only English)
+def check_spelling(text, user_lang="English"):
+    """Check spelling only for English text"""
+    # Only run spell check if user selected English
+    if user_lang != "English":
+        return {}
+    
     try:
+        # Check if text contains non-English scripts
+        # If contains Urdu/Arabic/Hindi etc. - skip
+        if any('\u0600' <= c <= '\u06FF' for c in text):
+            return {}
+        if any('\u0900' <= c <= '\u097F' for c in text):
+            return {}
+        if any('\u4e00' <= c <= '\u9fff' for c in text):
+            return {}
+        
         from spellchecker import SpellChecker
-        spell = SpellChecker(language=lang_code)
+        spell = SpellChecker(language="en")
         words = text.split()
         misspelled = {}
+        
+        # Common words with apostrophes - skip them
         common_words = {
-            "don't": "don't", "don’t": "don't", "can't": "can't", "can’t": "can't",
-            "won't": "won't", "won’t": "won't", "shouldn't": "shouldn't",
-            "wouldn't": "wouldn't", "couldn't": "couldn't", "isn't": "isn't",
-            "aren't": "aren't", "wasn't": "wasn't", "weren't": "weren't",
-            "haven't": "haven't", "hasn't": "hasn't", "hadn't": "hadn't",
-            "doesn't": "doesn't", "didn't": "didn't", "I'm": "I'm", "I’m": "I'm",
-            "you're": "you're", "you’re": "you're", "we're": "we're",
-            "they're": "they're", "he's": "he's", "she's": "she's",
-            "it's": "it's", "it’s": "it's", "let's": "let's", "ma'am": "ma'am"
+            "don't", "don’t", "can't", "can’t", "won't", "won’t",
+            "shouldn't", "shouldn’t", "wouldn't", "wouldn’t",
+            "couldn't", "couldn’t", "isn't", "isn’t", "aren't", "aren’t",
+            "wasn't", "wasn’t", "weren't", "weren’t", "haven't", "haven’t",
+            "hasn't", "hasn’t", "hadn't", "hadn’t", "doesn't", "doesn’t",
+            "didn't", "didn’t", "I'm", "I’m", "you're", "you’re",
+            "we're", "we’re", "they're", "they’re", "he's", "he’s",
+            "she's", "she’s", "it's", "it’s", "let's", "let’s", "ma'am"
         }
+        
         for word in words:
+            # Skip if it's a known word with apostrophe
             if word.lower() in common_words:
                 continue
+            
+            # Remove punctuation for checking
             clean_word = re.sub(r'[^\w\s\']', '', word)
             if clean_word and clean_word.lower() not in spell:
                 correction = spell.correction(clean_word)
@@ -258,7 +621,6 @@ def translate_with_chatgpt(text, target_lang, source_lang="auto"):
         return None
 
 def translate_with_google(text, target_lang, source_lang=None):
-    """Translate using deep_translator (Google Translate) - Always works on Cloud"""
     try:
         if source_lang is None:
             if any('\u0600' <= c <= '\u06FF' for c in text):
@@ -307,7 +669,6 @@ def smart_translate(text, target_lang, source_lang=None):
     if not results:
         return "Translation failed. Please check internet connection.", "Error"
     
-    # Select best translation (first available)
     selected_api, selected_text = results[0]
     selected_text = post_process_translation(selected_text, source_lang, target_lang)
     st.caption(f"✅ Translated using: **{selected_api}**")
@@ -350,8 +711,9 @@ with col1:
     st.caption(get_label(lang_a, "kb_guide"))
     text_a = st.text_area("", height=120, key="input_a", placeholder=get_label(lang_a, "write_here"), label_visibility="collapsed")
     
+    # Spell Check - Only for English
     if text_a.strip():
-        spell_errors = check_spelling(text_a, "en")
+        spell_errors = check_spelling(text_a, lang_a)
         if spell_errors:
             st.warning("✏️ " + get_label(lang_a, "spelling") + ":")
             for wrong, correct in spell_errors.items():
@@ -386,8 +748,9 @@ with col2:
     st.caption(get_label(lang_b, "kb_guide"))
     text_b = st.text_area("", height=120, key="input_b", placeholder=get_label(lang_b, "write_here"), label_visibility="collapsed")
     
+    # Spell Check - Only for English
     if text_b.strip():
-        spell_errors = check_spelling(text_b, "en")
+        spell_errors = check_spelling(text_b, lang_b)
         if spell_errors:
             st.warning("✏️ " + get_label(lang_b, "spelling") + ":")
             for wrong, correct in spell_errors.items():
@@ -449,4 +812,4 @@ if btn_b:
         st.warning(get_label(lang_b, "warning"))
 
 st.divider()
-st.caption("🌍 LinguaBridge — Breaking Language Barriers! | 💬 Text | 🗣️ 100+ Languages | ✏️ Spell Check | 🔊 Audio")
+st.caption("🌍 LinguaBridge — Breaking Language Barriers! | 💬 Text | 🗣️ 100+ Languages | ✏️ Spell Check (English Only) | 🔊 Audio")
